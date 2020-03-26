@@ -1,4 +1,4 @@
-let dburl ='mongodb+srv://fangchangjun:heheda@cluster0-0lhtw.mongodb.net/mall?retryWrites=true&w=majority'
+let dburl ='mongodb+srv://admin:admin@cluster0-3g9fn.mongodb.net/piluwaAdmin?retryWrites=true&w=majority'
 const mongoose = require('mongoose')
 mongoose.connect(dburl,{ useNewUrlParser: true,useUnifiedTopology: true,useFindAndModify:false });
 // mongoose.set('useFindAndModify', false);
