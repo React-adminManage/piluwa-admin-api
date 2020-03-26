@@ -9,6 +9,7 @@ const logger = require('koa-logger')
 const index = require('./routes/index')
 const admins = require('./routes/admin')
 const user = require('./routes/user')
+const shop = require('./routes/shop')
 
 require('./db/connect') //连接数据库
 
@@ -39,7 +40,7 @@ app.use(async (ctx, next) => {
 app.use(index.routes(), index.allowedMethods())
 app.use(admins.routes(), admins.allowedMethods())
 app.use(user.routes(), user.allowedMethods())
-
+app.use(shop.routes(), shop.allowedMethods())
 // error-handling
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
