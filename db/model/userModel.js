@@ -17,7 +17,8 @@ let userScheme = mongoose.Schema({
         getPhone: String,
         address: String,
         status: String
-    }]
+    }],
+    vip:Boolean, // 是否为会员
 })
 
 let userModel = mongoose.model("users",userScheme)

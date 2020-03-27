@@ -1,7 +1,38 @@
 const order = require("../db/model/orderModel")
 
 class OrderCtr{
-    // 查找所有订单信息
+
+
+
+    /**
+   * 
+   * @api {get} order/find 查询所有订单
+   * @apiName 订单信息
+   * @apiGroup order
+   * @apiVersion  1.0.0
+   * 
+   * 
+   * @apiParam  {Number} [pageSize] 每页显示个数   默认5个
+   * @apiParam  {Number} [page] 当前页数  默认第一页
+   * 
+   * @apiSuccess   {Number} code  状态码
+ 
+   * @apiSuccess   {String} msg  描述信息
+   * 
+   * @apiParamExample  {type} 例子:
+   * {
+   *    pageSize : 1
+   *    page :  1
+   * }
+   * 
+   * 
+   * @apiSuccessExample {type} Success-Response:
+   * {
+  
+  * }
+  * 
+  * 
+  */
     async find(ctx){
         let {page = 1 ,pageSize = 5} = ctx.query
         let allresult = await order.find()
@@ -12,6 +43,36 @@ class OrderCtr{
             msg:'查询ok'}
     }
 
+
+  /**
+   * 
+   * @api {get} order/searchStatus 订单状态检索
+   * @apiName 订单状态检索
+   * @apiGroup order
+   * @apiVersion  1.0.0
+   * 
+   * 
+   * @apiParam  {Number} [pageSize] 每页显示个数   默认5个
+   * @apiParam  {Number} [page] 当前页数  默认第一页
+   * 
+   * @apiSuccess   {Number} code  状态码
+ 
+   * @apiSuccess   {String} msg  描述信息
+   * 
+   * @apiParamExample  {type} 例子:
+   * {
+   *    pageSize : 1
+   *    page :  1
+   * }
+   * 
+   * 
+   * @apiSuccessExample {type} Success-Response:
+   * {
+  
+  * }
+  * 
+  * 
+  */
     // 根据status检索订单 
     async searchStatus(ctx){
         let {page = 1 ,pageSize = 5,oStatus} = ctx.query
@@ -23,6 +84,37 @@ class OrderCtr{
             msg:'查询ok'}
     }
 
+
+
+  /**
+   * 
+   * @api {post} order/audioOrder 审核订单
+   * @apiName 审核订单
+   * @apiGroup order
+   * @apiVersion  1.0.0
+   * 
+   * 
+   * @apiParam  {Number} [pageSize] 每页显示个数   默认5个
+   * @apiParam  {Number} [page] 当前页数  默认第一页
+   * 
+   * @apiSuccess   {Number} code  状态码
+ 
+   * @apiSuccess   {String} msg  描述信息
+   * 
+   * @apiParamExample  {type} 例子:
+   * {
+   *    pageSize : 1
+   *    page :  1
+   * }
+   * 
+   * 
+   * @apiSuccessExample {type} Success-Response:
+   * {
+  
+  * }
+  * 
+  * 
+  */
     // 审核订单状态
     async audioOrder(ctx){
         let {oStatus,oId} = ctx.request.body 
@@ -31,6 +123,36 @@ class OrderCtr{
         ctx.body={code:0,msg:'审核完成'}
     }
 
+
+/**
+   * 
+   * @api {post} order/SearchByoId 订单号检索
+   * @apiName 订单号检索
+   * @apiGroup order
+   * @apiVersion  1.0.0
+   * 
+   * 
+   * @apiParam  {Number} [pageSize] 每页显示个数   默认5个
+   * @apiParam  {Number} [page] 当前页数  默认第一页
+   * 
+   * @apiSuccess   {Number} code  状态码
+ 
+   * @apiSuccess   {String} msg  描述信息
+   * 
+   * @apiParamExample  {type} 例子:
+   * {
+   *    pageSize : 1
+   *    page :  1
+   * }
+   * 
+   * 
+   * @apiSuccessExample {type} Success-Response:
+   * {
+  
+  * }
+  * 
+  * 
+  */
     // 根据订单号检索订单
     async SearchByoId(ctx){
         let {oId} = ctx.query
@@ -43,21 +165,6 @@ class OrderCtr{
 
 
     
-
-
-    // async find(ctx){
-    //     let userList = await user.find()
-    //     ctx.body={code:0,userList,msg:'查询ok'}
-    // }
-
-    // // 用户账号信息修改(账号解锁)
-    // async unlock(ctx){
-    //     let {_id,status}= ctx.request.body  
-    //     let result = await user.findByIdAndUpdate({_id},{status})
-    //     console.log(result)
-    //     // if(!result){ ctx.throw(404,'管理员修改失败')}
-    //     ctx.body={code:0,msg:'用户账号已解锁'}
-    // }  
   }
   module.exports =new OrderCtr()
   

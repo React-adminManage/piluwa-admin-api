@@ -1,0 +1,8 @@
+
+{
+    "name": "appName",
+    "title": "appTitle",
+    "description":"appDescription",
+    "url" : "https://localhost:3001",
+    "version": "1.0.0"
+}  
