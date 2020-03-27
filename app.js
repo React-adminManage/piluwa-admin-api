@@ -5,11 +5,14 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const error = require('./utils/error')
 
 const index = require('./routes/index')
 const admins = require('./routes/admin')
 const user = require('./routes/user')
 const shop = require('./routes/shop')
+const type = require('./routes/type')
+const order = require('./routes/order')
 
 require('./db/connect') //连接数据库
 
@@ -20,6 +23,7 @@ onerror(app)
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
+app.use(error)
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
@@ -41,6 +45,9 @@ app.use(index.routes(), index.allowedMethods())
 app.use(admins.routes(), admins.allowedMethods())
 app.use(user.routes(), user.allowedMethods())
 app.use(shop.routes(), shop.allowedMethods())
+app.use(type.routes(), type.allowedMethods())
+app.use(order.routes(), order.allowedMethods())
+
 // error-handling
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)

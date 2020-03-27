@@ -1,4 +1,6 @@
 const admin = require("../db/model/adminModel")
+const jsonWebToken = require("jsonwebtoken")
+const {secret} = require('../config/secret')
 class AdminCtr{
   // 查找所有管理员信息
   async find(ctx){
@@ -43,12 +45,13 @@ class AdminCtr{
   async login(ctx){
     let {userName,passWord} = ctx.request.body  
     let result =await admin.find({userName,passWord})
-    console.log(result)
     if(result.length==0){ctx.throw(404,'用户名或密码错误')}
     if(result[0].Status==0){
       ctx.throw(405,'该账号被禁用')
     }
-    ctx.body={code:0,msg:'登录成功'}
+    console.log(result)
+    let token = jsonWebToken.sign({result},secret,{expiresIn:"1d"}) //生成token
+    ctx.body={code:0,token,msg:'登录成功'}
   }
 }
 module.exports =new AdminCtr()
