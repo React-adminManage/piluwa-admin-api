@@ -33,14 +33,24 @@ class OrderCtr{
   * 
   * 
   */
-    async find(ctx){
-        let {page = 1 ,pageSize = 5} = ctx.query
-        let allresult = await order.find()
-        let orderList = await order.find().limit(Number(pageSize)).skip((page-1)*pageSize)
-        ctx.body={code:0,
-            orderList,
-            allcount:allresult.length,
-            msg:'查询ok'}
+    async find(ctx){ //多条件查询所有
+            let {page = 1 ,pageSize = 5,oId,oUser} = ctx.request.body
+            var regUser = new RegExp(oUser, "i");
+            var regId = new RegExp(oId, "i");
+            var _filter = {
+              //多字段匹配
+              $and: [
+               {oUser: {$regex: regUser}},
+               {oId: {$regex: regId}},
+              ]
+             }
+             let allresult = await order.find(_filter)
+             let orderList = await order.find(_filter).limit(Number(pageSize)).skip((page-1)*pageSize)
+             ctx.body={code:0,
+                orderList,
+                allcount:allresult.length,
+                msg:'查询ok'
+              }
     }
 
 
@@ -73,15 +83,27 @@ class OrderCtr{
   * 
   * 
   */
-    // 根据status检索订单 
+    // 根据status检索订单  多条件
     async searchStatus(ctx){
-        let {page = 1 ,pageSize = 5,oStatus} = ctx.query
-        let allresult = await order.find()
-        let searchRes = await order.find({oStatus}).limit(Number(pageSize)).skip((page-1)*pageSize)
-        ctx.body={code:0,
-            searchRes,
+   
+        let {page = 1 ,pageSize = 5,oStatus,oId,oUser} = ctx.request.body
+        var regUser = new RegExp(oUser, "i");
+        var regId = new RegExp(oId, "i");
+        var _filter = {
+          //多字段匹配
+          $and: [
+           {oUser: {$regex: regUser}},
+           {oId: {$regex: regId}},
+           {oStatus:oStatus}
+          ]
+         }
+         let allresult = await order.find(_filter)
+         let orderList = await order.find(_filter).limit(Number(pageSize)).skip((page-1)*pageSize)
+         ctx.body={code:0,
+            orderList,
             allcount:allresult.length,
-            msg:'查询ok'}
+            msg:'查询ok'
+          }
     }
 
 
@@ -115,10 +137,10 @@ class OrderCtr{
   * 
   * 
   */
-    // 审核订单状态
+    // 审核订单
     async audioOrder(ctx){
-        let {oStatus,oId} = ctx.request.body 
-        let result = await order.findOneAndUpdate({oId},{oStatus})
+        let {oStatus,oId,auditRes} = ctx.request.body 
+        let result = await order.findOneAndUpdate({oId},{oStatus,auditRes})
         if(!result){ ctx.throw(404,'审核失败')}
         ctx.body={code:0,msg:'审核完成'}
     }
@@ -162,6 +184,31 @@ class OrderCtr{
             msg:'查询ok'}
     }
 
+
+
+    // 多条件模糊查询
+    async mutilquery(ctx){
+      let {pageSize=5,page=1}=ctx.request.body;
+      let {oId,oUser,oStatus} = ctx.request.body;
+      console.log(oId,oUser)
+      var regUser = new RegExp(oUser, "i");
+      var regId = new RegExp(oId, "i");
+      var _filter = {
+        //多字段匹配
+        $and: [
+         {oUser: {$regex: regUser}},
+         {oId: {$regex: regId}},
+         {oStatus:oStatus}
+        ]
+       }
+       let allresult = await order.find(_filter)
+       let orderList = await order.find(_filter).limit(Number(pageSize)).skip((page-1)*pageSize)
+       ctx.body={code:0,
+          orderList,
+          allcount:allresult.length,
+          msg:'查询ok'
+        }
+    }
 
 
     

@@ -5,7 +5,7 @@ class AdminCtr{
 
   /**
    * 
-   * @api {get} admin/find 查找所有管理员信息
+   * @api {get} /admin/find 查找所有管理员信息
    * @apiName 管理员信息
    * @apiGroup admin
    * @apiVersion  1.0.0
@@ -50,7 +50,7 @@ class AdminCtr{
 
  /**
  * 
- * @api {post} admin/add 管理员添加
+ * @api {post} /admin/add 管理员添加
  * @apiName 管理员添加
  * @apiGroup admin
  * @apiVersion  1.0.0
@@ -86,7 +86,7 @@ class AdminCtr{
 
  /**
  * 
- * @api {post} admin/del 管理员删除
+ * @api {post} /admin/del 管理员删除
  * @apiName 管理员删除
  * @apiGroup admin
  * @apiVersion  1.0.0
@@ -122,7 +122,7 @@ class AdminCtr{
   
  /**
  * 
- * @api {post} admin/update 管理员信息修改
+ * @api {post} /admin/update 管理员信息修改
  * @apiName 管理员信息修改
  * @apiGroup admin
  * @apiVersion  1.0.0
@@ -165,7 +165,7 @@ class AdminCtr{
 
  /**
  * 
- * @api {post} admin/dupName 管理员重名判断
+ * @api {post} /admin/dupName 管理员重名判断
  * @apiName 管理员重名判断
  * @apiGroup admin
  * @apiVersion  1.0.0
@@ -203,7 +203,7 @@ class AdminCtr{
 
   /**
  * 
- * @api {post} admin/login 管理员登录
+ * @api {post} /admin/login 管理员登录
  * @apiName 管理员登录
  * @apiGroup admin
  * @apiVersion  1.0.0

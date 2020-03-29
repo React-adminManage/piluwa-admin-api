@@ -1,12 +1,13 @@
 const router = require('koa-router')()
 router.prefix('/order')
 
-const{find,searchStatus,audioOrder,SearchByoId} = require('../Controllers/orderCtr')  
+const{find,searchStatus,audioOrder,SearchByoId,mutilquery} = require('../Controllers/orderCtr')  
 
-router.get('/find',find)
+router.post('/find',find)
 router.get('/SearchByoId',SearchByoId)
-router.get('/searchStatus',searchStatus)
+router.post('/searchStatus',searchStatus)
 router.post('/audioOrder',audioOrder)
+router.post('/mutilquery',mutilquery)
 
 
 

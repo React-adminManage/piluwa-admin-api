@@ -6,6 +6,7 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const error = require('./utils/error')
+const cors = require('koa2-cors');
 
 const index = require('./routes/index')
 const admins = require('./routes/admin')
@@ -30,6 +31,16 @@ app.use(require('koa-static')(__dirname + '/public'))
 
 app.use(views(__dirname + '/views', {
   extension: 'pug'
+}))
+app.use(cors({
+  origin: function (ctx) {
+          return "*"; // 允许来自所有域名请求  
+  },
+  exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+  maxAge: 5,
+  // credentials: true,
+  allowMethods: ['GET', 'POST', 'DELETE'],
+  allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
 }))
 
 // logger

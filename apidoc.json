@@ -3,6 +3,6 @@
     "name": "appName",
     "title": "appTitle",
     "description":"appDescription",
-    "url" : "https://localhost:3001",
+    "url" : "http://47.97.244.129:3002",
     "version": "1.0.0"
 }  

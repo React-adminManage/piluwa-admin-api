@@ -5,7 +5,7 @@ class TypeCtr{
 
 /**
  * 
- * @api {post} type/add 分类添加
+ * @api {post} /type/add 分类添加
  * @apiName 分类添加
  * @apiGroup type
  * @apiVersion  1.0.0
@@ -40,7 +40,7 @@ class TypeCtr{
 
 /**
  * 
- * @api {get} type/find 所有分类
+ * @api {get} /type/find 所有分类
  * @apiName 所有分类
  * @apiGroup type
  * @apiVersion  1.0.0
@@ -111,7 +111,7 @@ class TypeCtr{
 
 /**
  * 
- * @api {post} type/del 分类删除
+ * @api {post} /type/del 分类删除
  * @apiName 分类删除
  * @apiGroup type
  * @apiVersion  1.0.0

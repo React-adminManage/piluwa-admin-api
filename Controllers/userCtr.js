@@ -4,7 +4,7 @@ class UserCtr{
 
 /**
  * 
- * @api {get} user/find 查找所有用户信息
+ * @api {get} /user/find 查找所有用户信息
  * @apiName 用户信息
  * @apiGroup user
  * @apiVersion  1.0.0
@@ -76,7 +76,7 @@ class UserCtr{
 
 /**
  * 
- * @api {post} user/findLock 状态查找用户信息
+ * @api {post} /user/findLock 状态查找用户信息
  * @apiName 状态查找用户信息
  * @apiGroup user
  * @apiVersion  1.0.0
@@ -129,7 +129,7 @@ class UserCtr{
 
 /**
  * 
- * @api {get} user/unlock 用户账号锁定
+ * @api {get} /user/unlock 用户账号锁定
  * @apiName 账号锁定
  * @apiGroup user
  * @apiVersion  1.0.0

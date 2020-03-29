@@ -12,6 +12,7 @@ let orderScheme = mongoose.Schema({
     'updateTime':String,  //更新时间
     'allprice':Number,    //总价
     'auditMsg':String,   //审核信息
+    'auditRes':String,  //审核结果
 })
 
 let orderModel = mongoose.model("orders",orderScheme)
