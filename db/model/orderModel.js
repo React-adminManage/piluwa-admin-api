@@ -7,12 +7,13 @@ let orderScheme = mongoose.Schema({
     "oShopMsg": Array,   // 订单内容信息
     "oAddress": Object,  //订单收货地址
     'oStatus':String,  //订单状态
-    // 0 未付款  1 已付款  2 已完成  3 取消  4审核中
+    // 0 未付款  1 发货中  2 已完成  3 取消  4审核中  5已退款
     'createTime':String,  //创建时间
     'updateTime':String,  //更新时间
     'allprice':Number,    //总价
     'auditMsg':String,   //审核信息
     'auditRes':String,  //审核结果
+    'audioAdmin':String,  //审核人员
 })
 
 let orderModel = mongoose.model("orders",orderScheme)

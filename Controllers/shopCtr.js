@@ -114,7 +114,8 @@ class ShopCtr{
      * @apiGroup shop
      * @apiVersion  1.0.0
      * 
-     * 
+     * @apiParam  {String} productId  商品Id
+     * @apiParam  {String} Status  商品状态
      * @apiParam  {String} imgUrl  图片地址
      * @apiParam  {String} title  名字
      * @apiParam  {String} productName  标题
@@ -130,6 +131,8 @@ class ShopCtr{
      * 
      * @apiParamExample  {type} 例子:
     { 
+        "productId":'112132',
+        "Status":"1",
         "imgUrl" : "http://haitao.nosdn2.127.net/1bl7l6omn61_800_800.jpg?imageView&thumbnail=800x0&quality=85", 
         "title" : "荷兰牛栏1111", 
         "productName" : "Nutrion荷兰牛栏 婴幼儿H.A半水解蛋白奶粉1段(0-6个月)750克/罐", 
@@ -156,12 +159,12 @@ class ShopCtr{
 
     async add(ctx){
         let {
-            imgUrl,title,productName,originalPrice,currentPrice,
-            describe,standards,count,type
+            productId,imgUrl,title,productName,originalPrice,currentPrice,
+            describe,standards,count,type,Status
         } = ctx.request.body
         let obj={
             imgUrl,title,productName,originalPrice,currentPrice,
-            describe,standards,count,type,productId:1111
+            describe,standards,count,type,productId,Status
         }
         let result = await shop.insertMany(obj)
         if(!result){ ctx.throw(-1,'商品添加失败')}
@@ -231,6 +234,68 @@ class ShopCtr{
         if(!result){ ctx.throw(404,'商品修改失败')}
         ctx.body={code:0,msg:'修改商品上架状态'}
     } 
+
+
+
+
+
+    /**
+     * 
+     * @api {post} /shop/FindById  商品查找根据_id
+     * @apiName 商品查找根据_id
+     * @apiGroup shop
+     * @apiVersion  1.0.0
+     * 
+     * 
+     * @apiParam  {String} _id  商品_id
+     * 
+     * @apiSuccess   {Number} code  状态码
+     * @apiSuccess   {String} msg  描述信息
+     * @apiSuccess   {Object} result  查询到的商品信息
+     * 
+     * 
+     * @apiParamExample  {type} 例子:
+     * {
+     *    _id : 5e4615e449ce98c41380de40
+     * }
+     * @apiSuccessExample {type} Success-Response:
+   {
+  "code": 0,
+  "msg": "查询成功",
+  "result": {
+    "imgArr": [
+      "http://haitao.nosdn2.127.net/iuf2uiyf68_800_800.jpg?imageView&thumbnail=800x0&quality=85",
+      "http://haitao.nos.netease.com/iuf2uie212_800_800.jpg?imageView&thumbnail=800x0&quality=85",
+      "http://haitao.nosdn1.127.net/iuf2uimu13_800_800.jpg?imageView&thumbnail=800x0&quality=85"
+    ],
+    "_id": "5e4615e449ce98c41380de40",
+    "productId": "10001",
+    "imgUrl": "http://pop.nosdn.127.net/d7dba3b2-023e-4f68-8002-d754c0365bad?imageView&thumbnail=800x0&quality=85",
+    "title": "花王妙而舒",
+    "productName": "Merries 花王妙而舒 L54 纸尿裤/尿不湿",
+    "originalPrice": 108,
+    "currentPrice": 95,
+    "describe": "日本原装进口腰贴式纸尿裤，专为9~14kg宝宝设计，温柔呵护宝宝娇嫩的小屁屁。点状设计，透气性更强；凹凸构造与防漏护围，紧紧锁定软便稀便不侧漏。备受亚洲妈妈青睐。",
+    "standards": [
+      {
+        "standards": [
+          "L"
+        ],
+        "title": "大小"
+      }
+    ],
+    "count": 1,
+    "type": "推荐分类",
+    "Status": 1
   }
-  module.exports =new ShopCtr()
+}
+    */
+   async getById(ctx){
+        let {_id} = ctx.request.body  //获取商品_id
+        let result =await shop.findById(_id)
+        if(result.length==0){ ctx.throw(404,'商品不存在')}
+        ctx.body={code:0,msg:'查询成功',result}
+    }
+}
+module.exports =new ShopCtr()
   

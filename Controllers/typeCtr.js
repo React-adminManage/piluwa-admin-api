@@ -143,6 +143,46 @@ class TypeCtr{
         if(!result){ ctx.throw(404,'删除失败')}
         ctx.body={code:0,msg:'删除类别成功'}
     }
+
+
+
+  /**
+ * 
+ * @api {post} /type/edit 修改分类
+ * @apiName 修改分类
+ * @apiGroup type
+ * @apiVersion  1.0.0
+ * 
+ * 
+ * 
+ * @apiParam  {String} _id   类别的_id
+ * @apiParam  {String} Type  要修改成的分类值
+ * 
+ * @apiSuccess   {Number} code  状态码
+ * @apiSuccess   {String} msg  描述信息
+ * 
+ * @apiParamExample  {type} 例子:
+ * {
+    _id:5e7df7e0fec2842850bb7163,
+    Type:'修改'
+ * }
+ * 
+ * 
+ * @apiSuccessExample {type} Success-Response:
+ * {
+   "code": 0,
+   "msg": "修改类别成功"
+ * }
+ * 
+ * 
+ */
+async edit(ctx){
+  let {_id,Type} = ctx.request.body;
+  let result =await type.findByIdAndUpdate(_id,{Type})
+  if(!result){ ctx.throw(404,'修改失败')}
+  ctx.body={code:0,msg:'修改类别名成功'}
+}
+
   }
   module.exports =new TypeCtr()
   
