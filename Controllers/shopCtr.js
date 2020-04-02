@@ -172,6 +172,82 @@ class ShopCtr{
     }
 
 
+
+
+     /**
+     * 
+     * @api {post} /shop/edit  商品修改
+     * @apiName 商品修改
+     * @apiGroup shop
+     * @apiVersion  1.0.0
+     * 
+     * @apiParam  {String} _id  商品_id
+     * @apiParam  {String} productId  商品Id
+     * @apiParam  {String} Status  商品状态
+     * @apiParam  {String} imgUrl  图片地址
+     * @apiParam  {String} title  名字
+     * @apiParam  {String} productName  标题
+     * @apiParam  {String} originalPrice  标准价
+     * @apiParam  {String} currentPrice 会员价
+     * @apiParam  {String} describe  描述
+     * @apiParam  {String} standards  规格
+     * @apiParam  {String} count  库存
+     * @apiParam  {String} type  商品类别
+     * 
+     * @apiSuccess   {Number} code  状态码
+     * @apiSuccess   {String} msg  描述信息
+     * 
+     * @apiParamExample  {type} 例子:
+    { 
+        "productId":'112132',
+        "Status":"1",
+        "imgUrl" : "http://haitao.nosdn2.127.net/1bl7l6omn61_800_800.jpg?imageView&thumbnail=800x0&quality=85", 
+        "title" : "荷兰牛栏1111", 
+        "productName" : "Nutrion荷兰牛栏 婴幼儿H.A半水解蛋白奶粉1段(0-6个月)750克/罐", 
+        "originalPrice" : 269, 
+        "currentPrice" : 119,
+        "describe" : "【有效期至2020-08-01】适度水解蛋白低敏配方，在每日所需基本营养配方的基础上，对牛奶蛋白进行部分水解。不含蔗糖及乙基香兰素：口味清淡，奶味香醇，宝宝更易接受。新老包装随机发货。", 
+        "standards" : {
+            "title" : "阶段", 
+            "standards" : [
+                "一段", 
+                "二段", 
+                "三段"
+            ]
+        }, 
+        "count" :1,
+        "type" : "全球奶粉"
+    }
+     * @apiSuccessExample {type} Success-Response:
+    {
+        "code": 0,
+        "msg": "商品添加成功"
+    }
+    */
+
+   async edit(ctx){
+    let {
+        _id,productId,imgUrl,title,productName,originalPrice,currentPrice,
+        describe,standards,count,type,Status
+    } = ctx.request.body
+    let obj={
+        imgUrl,title,productName,originalPrice,currentPrice,
+        describe,standards,count,type,productId,Status
+    }
+    let result = await shop.findByIdAndUpdate(_id,obj)
+    if(!result){ ctx.throw(-1,'商品添加失败')}
+    ctx.body ={code:0,msg:'商品添加成功'}
+}
+
+
+
+
+
+
+
+
+
+
     /**
      * 
      * @api {post} /shop/del 商品删除

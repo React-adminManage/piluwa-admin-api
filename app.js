@@ -18,6 +18,7 @@ const shop = require('./routes/shop')
 const type = require('./routes/type')
 const order = require('./routes/order')
 const upload = require('./routes/upload')
+const log = require('./routes/Log')
 
 require('./db/connect') //连接数据库
 
@@ -74,6 +75,7 @@ app.use(shop.routes(), shop.allowedMethods())
 app.use(type.routes(), type.allowedMethods())
 app.use(order.routes(), order.allowedMethods())
 app.use(upload.routes(), upload.allowedMethods())
+app.use(log.routes(), log.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

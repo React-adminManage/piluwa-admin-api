@@ -228,11 +228,11 @@ class AdminCtr{
  * }
  */
   async login(ctx){
-    let {userName,passWord} = ctx.request.body  
-    let result =await admin.find({userName,passWord})
-    if(result.length==0){ctx.throw(404,'用户名或密码错误')}
-    if(result[0].Status==0){
-      ctx.throw(405,'该账号被禁用')
+    let {userName,passWord} = ctx.request.body    //获取前端发送的账号密码
+    let result =await admin.find({userName,passWord})  //数据库查询
+    if(result.length==0){ctx.throw(404,'用户名或密码错误')} //没查找
+    if(result[0].Status==0){ //用户的状态==0
+      ctx.throw(405,'该账号被禁用') 
     }
     console.log(result)
     let token = jsonWebToken.sign({result},secret,{expiresIn:"1d"}) //生成token
