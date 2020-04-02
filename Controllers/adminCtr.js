@@ -238,6 +238,14 @@ class AdminCtr{
     let token = jsonWebToken.sign({result},secret,{expiresIn:"1d"}) //生成token
     ctx.body={code:0,token,msg:'登录成功'}
   }
+
+
+  async changeStatus(ctx){
+    let {_id,Status}= ctx.request.body 
+    let result = await admin.findByIdAndUpdate({_id},{Status})
+    if(!result){ ctx.throw(404,'账号状态更新失败')}
+    ctx.body={code:0,msg:'账号状态更新成功'}
+  }
 }
 module.exports =new AdminCtr()
 
